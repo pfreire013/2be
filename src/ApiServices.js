@@ -1,4 +1,4 @@
-import Autenticacao from './Autenticacao'
+import Autenticacao from './Authentication'
 
 export const url_api = "http://34.217.148.38";
 

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { url_api } from './ApiServico';
+import { url_api } from './ApiServices';
 import Cookies from 'js-cookie';
 
 
 function Authentication(props) {
-  const [login, setLogin] = useState()
-  const [logout, setLogout] = useState()
+  //const [login, setLogin] = useState()
+  //const [logout, setLogout] = useState()
 
   const login = async (key, senha) => {
     let autenticacao = {

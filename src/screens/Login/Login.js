@@ -10,11 +10,11 @@ function Login() {
           <Title>Login</Title>
           <InputName />
           <InputPassword />
+          <LoginButton>
+            <ButtonText>Entrar</ButtonText>
+          </LoginButton>
+          <Link to='/home'>Home</Link>
         </LoginContainer>
-        <LoginButton>
-          <ButtonText>Entrar</ButtonText>
-        </LoginButton>
-        <Link to='/home'>Home</Link>
     </Container>
   );
 }

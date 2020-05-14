@@ -7,6 +7,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: 10%;
 `
 
 export const Title = styled.h1`
@@ -19,7 +20,6 @@ export const Title = styled.h1`
 `
 
 export const LoginContainer = styled.div`
-  height: 200px;
   width: 300px;
   background: #FFFFFF;
   border: 2px solid #B3B3B3;
@@ -50,6 +50,7 @@ export const LoginButton = styled.button`
   border-radius: 25px;
   height: 40px;
   width: 100px;
+  margin-top: 12px;
 `
 
 export const ButtonText = styled.h1`

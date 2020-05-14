@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import Autenticacao from './../../Authentication';
+
 
 import { Container, Title, LoginContainer, InputName, InputPassword, LoginButton, ButtonText } from './styles';
 
@@ -19,7 +21,7 @@ function Login(props) {
     this.setState({ Modal: { ...this.state.Modal, [e.target.name]: e.target.value } })
   }
 
-  const logarUsuario = (e) => {
+  const logarUsuario = async (e) => {
       e.preventDefault();
 
       var _servicoAutenticacao = new Autenticacao();

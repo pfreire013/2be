@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import Autenticacao from './../../Authentication';
 
 
-import { Container, Title, LoginContainer, InputName, InputPassword, LoginButton, ButtonText } from './styles';
+import { Container, LoginContainer } from './styles';
 
 function Login(props) {
   const [key, setKey ] = useState('')
@@ -39,17 +39,16 @@ function Login(props) {
   return (
     <Container>
         <LoginContainer>
-          <Title>Login</Title>
-          <InputName 
+          <h1>Login</h1>
+          <input 
             placeholder='Usuario'
           />
-          <InputPassword 
+          <input 
             placeholder='Senha'
           />
-          <LoginButton>
-            <ButtonText>Entrar</ButtonText>
-          </LoginButton>
-          <Link to='/home'>Home</Link>
+          <Link to="/home">
+            <button type="button">Entrar</button>
+          </Link>
         </LoginContainer>
     </Container>
   );

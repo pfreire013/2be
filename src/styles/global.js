@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import { theme } from '../theme';
 
 export default createGlobalStyle`
   * {
@@ -8,16 +9,14 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
 
-  html, body, #root {
+  html,body, #root {
     min-height: 100%;
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
   }
 
   body {
-    background: '#eeeeee';
+    background: ${theme.color.lightGray};
     -webkit-font-smoothing: antialiased !important;
+   
   }
 
   body, input, button {

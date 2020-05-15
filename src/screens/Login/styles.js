@@ -7,7 +7,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 10%;
+  margin-top: 20%;
 `
 
 export const Title = styled.h1`
@@ -21,8 +21,8 @@ export const Title = styled.h1`
 
 export const LoginContainer = styled.div`
   width: 300px;
-  background: #FFFFFF;
-  border: 2px solid #B3B3B3;
+  background: ${theme.color.white};
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -33,16 +33,18 @@ export const LoginContainer = styled.div`
 export const InputName = styled.input`
   height: 40px;
   width: 80%;
-  border: 2px solid ${theme.color.blue};
+  border: 2px solid ${theme.color.lightGray};
   border-radius: 20px;
   margin-bottom: 8px;
+  padding: 12px;
 `
 
 export const InputPassword = styled.input`
   height: 40px;
   width: 80%;
-  border: 2px solid ${theme.color.blue};
+  border: 2px solid ${theme.color.lightGray};
   border-radius: 20px;
+  padding: 12px;
 `
 
 export const LoginButton = styled.button`

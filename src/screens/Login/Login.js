@@ -40,8 +40,12 @@ function Login(props) {
     <Container>
         <LoginContainer>
           <Title>Login</Title>
-          <InputName />
-          <InputPassword />
+          <InputName 
+            placeholder='Usuario'
+          />
+          <InputPassword 
+            placeholder='Senha'
+          />
           <LoginButton>
             <ButtonText>Entrar</ButtonText>
           </LoginButton>

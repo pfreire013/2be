@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Container, TemplateContainer, TableBody, TableContaier  } from './styles';
 
-function Home() {
+function Template() {
   return (
     <Container>
       <h1>Template</h1>
@@ -59,4 +59,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Template;

@@ -46,7 +46,7 @@ function Login(props) {
           <input 
             placeholder='Senha'
           />
-          <Link to="/home">
+          <Link to="/received">
             <button type="button">Entrar</button>
           </Link>
         </LoginContainer>

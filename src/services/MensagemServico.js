@@ -1,10 +1,9 @@
-import { url_api } from './ApiServico';
-import { autenticar } from '../../Servicos/ApiServico';
+import { url_api, autenticar } from './ApiServico';
 
 
-export async function obterMensagens(origem, celular, skip) {
+export async function obterMensagens({origem, celular, skip}) {
         let parametros = {
-            origem: oriegm ? origem : null,
+            //origem: oriegm ? origem : null,
             celular: celular ? celular : null,
             skip: skip ? skip : null
         }
@@ -40,7 +39,7 @@ export async function enviarMensagens(mensagens) {
             body: JSON.stringify(dados)
         }
 
-        let res = await fetch(url + '/mensagem', detalhesChamada);
+        let res = await fetch(url_api + '/mensagem', detalhesChamada);
 
         if (!res.ok) {
             let erro = await res.json();

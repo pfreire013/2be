@@ -38,6 +38,11 @@ export const LoginContainer = styled.div`
     padding: 12px;
   }
 
+  input:last-child {
+    -webkit-text-security: disc;
+    text-security: disc;
+  }
+
   button {
     background: #73BCFF;
     border-radius: 25px;

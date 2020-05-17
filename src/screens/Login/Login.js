@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import Autenticacao from './../../Authentication';
-
+import { login } from './../../services/Autenticacao';
 
 import { Container, LoginContainer } from './styles';
 
-function Login(props) {
+function Login() {
   const [key, setKey ] = useState('')
   const [senha, setSenha ] = useState('')
   const history = useHistory();
@@ -24,17 +23,15 @@ function Login(props) {
   const logarUsuario = async (e) => {
       e.preventDefault();
 
-      var _servicoAutenticacao = new Autenticacao();
       try {
-          await _servicoAutenticacao.login(key, senha);
-          history.push('/home');
+          console.log('entrie')
+          await login(key, senha);
+          history.push('/template');
       }
       catch (error) {
           return alert('Key ou senha inválidas')
       }
   }
-
-
 
   return (
     <Container>
@@ -42,13 +39,18 @@ function Login(props) {
           <h1>Login</h1>
           <input 
             placeholder='Usuario'
+            onChange={e => setKey(e.target.value)}
           />
-          <input 
+          <input
+            name="password" 
+            type="password" 
             placeholder='Senha'
+            onChange={e => setSenha(e.target.value)}
           />
-          <Link to="/received">
-            <button type="button">Entrar</button>
-          </Link>
+            <button 
+              type="button"
+              onClick={logarUsuario}  
+            >Entrar</button>
         </LoginContainer>
     </Container>
   );

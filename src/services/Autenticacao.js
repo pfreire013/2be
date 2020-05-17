@@ -1,20 +1,28 @@
 import { url_api } from './ApiServico';
+import { domain } from '../API'
 import Cookies from 'js-cookie';
 
 
 export async function login(key, senha) {
         let autenticacao = {
-            Key: key,
-            Senha: senha
+            key_acesso: key,
+            password: senha
         }
+        console.log('autenticacao', autenticacao)
 
         const detalhesChamada = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify(autenticacao)
         }
 
-        let res = await fetch(url_api + 'autenticar/', detalhesChamada);
+        console.log('detalhesChamada', detalhesChamada)
+
+
+        let res = await fetch('http://34.217.148.38/autenticacao/', detalhesChamada);
 
         if (!res.ok) {
             let erro = await res.json();

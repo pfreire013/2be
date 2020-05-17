@@ -1,5 +1,4 @@
-import { url_api } from './ApiServico';
-import { autenticar } from '../../Servicos/ApiServico';
+import { url_api , autenticar} from './ApiServico';
 import {enviarMensagens, obterMensagens} from './MensagemServico'
 
 
@@ -43,18 +42,18 @@ export function salvarResposta(id) {
         localStorage.setItem('mensagensRespondidas', JSON.stringify(msgs));
     }
     else{
-        var msgs = {ids = [id]};
+        var msgs = {ids: [id]};
         localStorage.setItem('mensagensRespondidas', JSON.stringify(msgs));
     }
 }
 
-export function modelarMensagem(tipo, celular, template, texto, midia, parametros) {
+export function modelarMensagem(tipo, celular, template, texto, parametros) {
     var obj = {
         'tipo': tipo,
         'celular': celular,
         'template': template,
         'texto': texto,
-        'midia': midia,
+        //'midia': midia,
         'parametros': parametros
     }
     

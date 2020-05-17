@@ -142,9 +142,10 @@ function Template() {
     }
 
     let divididoPor200 = celulares.length / 200
+
     
     let mensagens = []
-    for(let count = 0; count <= Math.round(divididoPor200) || 999; count++){
+    for(let count = 0; count <= Math.round(divididoPor200) || 5 ; count++){
       for(let i = 0; i <= 199; i++){
         let mensagem = modelarMensagem('template', celulares[i].celular, selectTemplate._id, selectTemplate.conteudo, [] )
         mensagens.push(mensagem)

@@ -2,15 +2,15 @@ import styled from 'styled-components'
 import { theme } from '../../../theme'
 
 export const Container = styled.div`
-  max-width: 1000px;
   background: ${theme.color.white};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border-radius: 100px;
+  border-radius: 20px;
   padding:  8px 16px 8px 16px;
-  margin-bottom: 8px;
+  margin: 8px 80px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  margin-bottom: 80px;
   `
 
 export const Header = styled.div`
@@ -20,10 +20,11 @@ export const Header = styled.div`
 `
 
 export const DataContainer = styled.div`
-  width: 55%;
+  width: 35%;
   display: flex;
   justify-content: center;
   align-items: center; 
+  border-right: 1px solid ${theme.color.lightGray};
 
   h2 {
     font-size: 20px;
@@ -40,6 +41,8 @@ export const TypeContainer = styled.div`
   align-items: flex-start; 
   flex-direction: column;
   padding: 0 8px;
+  border-right: 1px solid ${theme.color.lightGray};
+
 
   h2 {
     font-size: 20px;
@@ -64,6 +67,8 @@ export const MessageContainer = styled.div`
   align-items: flex-start; 
   flex-direction: column;
   padding: 0 8px;
+  border-right: 1px solid ${theme.color.lightGray};
+
   
   h2 {
     font-size: 20px;
@@ -86,6 +91,8 @@ export const CheckBoxContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center; 
+  border-right: 1px solid ${theme.color.lightGray};
+
 
   input[type="checkbox"] {
     font-size: 30px;
@@ -103,6 +110,9 @@ export const SendContainer = styled.div`
     width: 50px;
     border-radius: 25px;
     background: ${theme.color.green};
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
 `

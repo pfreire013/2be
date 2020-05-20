@@ -163,6 +163,10 @@ export const ListContacts = styled.div`
 
 `
 
+export const LogoutContainer = styled.div`
+  position: absolute;
+`
+
 export const Logout = styled.button`
     height: 40px;
     padding: 8px;

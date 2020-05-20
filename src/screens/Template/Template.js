@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactFileReader from 'react-file-reader'
 
-import { Container, TemplateContainer, DropdownOpition, TemplateOpitionContainer, FooterContainer, ListContacts, OptionContainer, SendDropdown, Logout  } from './styles';
+import { Container, TemplateContainer, DropdownOpition, TemplateOpitionContainer, FooterContainer, ListContacts, OptionContainer, SendDropdown, Logout } from './styles';
 import { modelarMensagem } from '../../services/GeradorMensagemServico';
 import { obterTokenUsuario, logout } from '../../services/Autenticacao';
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
+import NavBar from '../../components/NavBar/Navbar';
 
 
 function Template() {
@@ -210,6 +211,8 @@ const handleLogout = () => {
 
 
   return (
+    <>
+    <NavBar index={1}/>
     <Container>
       <h1>Template</h1>
       <TemplateOpitionContainer>
@@ -297,8 +300,9 @@ const handleLogout = () => {
           }
         </ul>
       </ListContacts>
-      <Logout onClick={handleLogout}>Sair</Logout>
     </Container>
+      <Logout onClick={handleLogout}>Sair</Logout>
+    </>
   );
 }
 

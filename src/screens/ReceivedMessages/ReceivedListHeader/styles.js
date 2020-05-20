@@ -2,29 +2,26 @@ import styled from 'styled-components'
 import { theme } from '../../../theme'
 
 export const Container = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  padding: 16px 8px;
-`
-export const DataContainer = styled.div`
-  width: 45%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin: 8px 80px;
+  padding: 0 8px;
+`
+export const DataContainer = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
 
   div:nth-child(1n) {
-    width: 60px;
+    width: 140px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
   div:nth-child(2n) {
-    width: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 85px;
   }
 
   div:nth-child(3n) {
@@ -35,94 +32,71 @@ export const DataContainer = styled.div`
   }
 
   div:nth-child(4n) {
-    width: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 250px;
   }
 
   div:nth-child(5n) {
-    width: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 120px;
   }
-
-  div {
-    padding: 0 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-right: 1px solid ${theme.color.lightGray};
 
     h2 {
       font-size: 16px;
-      font-weight: normal;
+      font-weight: bold;
       text-align: center;
     }
-  }
 `
 
+
 export const TypeContainer = styled.div`
-  div {
-    width: 160px;
+    width: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-right: 1px solid ${theme.color.lightGray};
 
     h2 {
       font-size: 16px;
-      font-weight: normal;
+      font-weight: bold;
       text-align: center;
     }
-  }
 `
 
 export const MessageContainer = styled.div`
-  div {
-      width: 220px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-right: 1px solid ${theme.color.lightGray};
-
+  width: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+      
       h2 {
         font-size: 16px;
-        font-weight: normal;
-        text-align: center;
+      font-weight: bold;
+      text-align: center;
       }
-    }
 `
 
 export const CheckBoxContainer = styled.div`
-  div {
-      width: 95px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-right: 1px solid ${theme.color.lightGray};
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+      
 
       h2 {
         font-size: 16px;
-        font-weight: normal;
-        text-align: center;
+      font-weight: bold;
+      text-align: center;
       }
-    }
 `
 
 export const SendContainer  = styled.div`
-  div {
-      width: 30px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-right: 1px solid ${theme.color.lightGray};
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+     
 
       h2 {
         font-size: 16px;
-        font-weight: normal;
-        text-align: center;
+      font-weight: bold;
+      text-align: center;
       }
-    }
 `

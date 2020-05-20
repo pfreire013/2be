@@ -2,53 +2,52 @@ import styled from 'styled-components'
 import { theme } from '../../../theme'
  
 export const Container = styled.div`
-  max-width: 1000px;
-  background: ${theme.color.white};
+  background: ${props => props.isSended ? theme.color.Gray : theme.color.white};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border-radius: 100px;
+  border-radius: 10px;
   padding:  8px 16px 8px 16px;
-  margin-bottom: 8px;
+  margin: 8px 80px;
+  color: ${props => props.isSended ? theme.color.white : theme.color.black};
 `
 
 export const DataContainer = styled.div`
-  max-width: 55%; 
   display: flex;
   flex: 1;
   flex-direction: row;
   justify-content: space-between;
 
   div:nth-child(1n) {
-    width: 60px;
+    width: 23%;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
   div:nth-child(2n) {
-    width: 100px;
+    width: 15%;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
   div:nth-child(3n) {
-    width: 60px;
+    width: 10%;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
   div:nth-child(4n) {
-    width: 150px;
+    width: 250px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
   div:nth-child(5n) {
-    width: 60px;
+    width: 120px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -97,7 +96,7 @@ export const MessageContainer = styled.div`
 `
 
 export const CheckBoxContainer = styled.div`
-  width: 5%;
+  width: 10%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -117,6 +116,60 @@ export const SendContainer = styled.div`
     height: 50px;
     width: 50px;
     border-radius: 25px;
+    border: none;
     background: ${theme.color.green};
+  }
+`
+
+export const SeeOldMessageButton = styled.button`
+  background: none;
+  border: none;
+  padding: 0 8px;
+`
+
+export const ModalContainer = styled.div`
+  min-width: 300px;
+  max-width: 400px;
+  max-height: 500px;
+  background: ${theme.color.white};
+  overflow-y: scroll;
+`
+
+export const ExternalMessage = styled.div`
+  background: ${theme.color.lightGray};
+  border-radius: 10px;
+  padding: 12px 8px;
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+  h2 {
+    width:70%;
+    color: ${theme.color.black};
+    font-size: 16px;
+    font-weight: normal;
+  }
+
+  h2:nth-child(2n) {
+    width: 90px;
+    margin-left: 12px;
+  }
+`
+
+export const InternalMessages = styled.div`
+  background: ${theme.color.green};
+  border-radius: 10px;
+  padding: 12px 8px;
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  h2 {
+    color: ${theme.color.white};
+    text-align: right;
+    font-size: 16px;
+    font-weight: normal;
   }
 `

@@ -23,24 +23,16 @@ function ReceivedListHeader() {
         </div>
       </DataContainer>
       <TypeContainer>
-        <div>
           <h2>Tipo</h2>
-        </div>
       </TypeContainer>
       <MessageContainer>
-        <div>
           <h2>Mensagem</h2>
-        </div>
       </MessageContainer>
       <CheckBoxContainer>
-        <div>
           <h2>Check</h2>
-        </div>
       </CheckBoxContainer>
       <SendContainer>
-        <div>
           <h2>Enviar</h2>
-        </div>
       </SendContainer>
     </Container>
   );

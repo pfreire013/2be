@@ -1,7 +1,7 @@
 import styled from 'styled-components'
+import { theme } from '../../theme'
 
 export const Container = styled.div`
-  max-width: 1000px;
   margin: 80px auto;
 `
 
@@ -22,4 +22,14 @@ export const PaginationContainer = styled.div`
     font-size: 18px;
     margin: 0 8px;
   }
+`
+
+export const Logout = styled.button`
+  height: 40px;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  color: ${theme.color.white};
+  background: ${theme.color.red};
+  margin-top: 12px;
 `

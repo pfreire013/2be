@@ -1,116 +1,89 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReceivedPrimary from './ReceivedPrimary'
 import ReceivedList from './ReceivedList'
 import ReceivedListHeader from './ReceivedListHeader'
 import { url_api, autenticar } from '../../services/ApiServico';
 
 
-import { Container, PaginationContainer } from './styles';
+import { Container, PaginationContainer, Logout } from './styles';
 import { obterMensagens } from '../../services/MensagemServico';
+import NavBar from '../../components/NavBar/Navbar';
+import { obterTokenUsuario, logout } from '../../services/Autenticacao';
+import { useHistory } from 'react-router-dom';
 
 function ReceivedMessages() {
+  const [token, setToken] = useState()
+  const [respostas, setRespostas] = useState()
+  const [checkedAll, setCheckedAll] = useState()
+  const history = useHistory()
+
   useEffect(() => {
-    getMidia()
-    getMensgens()
+    let _token = obterTokenUsuario()
+    setToken(_token)
   },[])
 
-  const getMensgens = async () => {
-    const detalhesChamada = {
-      method: 'GET',
-      headers: autenticar(),
+  useEffect(() => {
+    if(token){
+      obterRespostas()
     }
-  
-    let res = await fetch('http://34.217.148.38/mensagem/', detalhesChamada)
-    console.log('mensagesn', res)
-  }
+  }, [token])
 
-  const getMidia = async () => {
-    const detalhesChamada = {
-      method: 'GET',
-      headers: autenticar(),
+  const obterRespostas = async () => {
+    let parametros = {
+        origem: 'externa'
     }
+    var url = new URL('http://34.217.148.38/mensagem/');
+    Object.keys(parametros).forEach(key => url.searchParams.append(key, parametros[key]));
+
+    let cabecalho = new Headers();
+    cabecalho.append('Authorization', `Bearer ${token}` );
+    cabecalho.append('Content-Type', 'application/json');
+    
+    const detalhesChamada = {
+        method: 'GET',
+        headers: cabecalho,
+    }
+
+    let res = await fetch(url, detalhesChamada);
+    
+    if (!res.ok) {
+        let erro = await res.json();
+        throw new Error(erro);
+    }
+    else {
+        let dados = await res.json();
+        setRespostas(dados)
+        console.log('dados', dados)
+        return dados;
+    }
+}
+
+const handleLogout = () => {
+  logout()
+  history.push('/');
+}
   
-    let res = await fetch('http://34.217.148.38/midia/', detalhesChamada)
-    console.log('mensagesn', res)
-  }
 
   return (
+    <>
+    <NavBar  index={2}/>
     <Container>
-      <ReceivedPrimary />
+      <ReceivedPrimary data={respostas} token={token} setCheckedAll={setCheckedAll} checkedAll={checkedAll} />
       <ReceivedListHeader />
       {
-        mockMensagensResponse.dados.map(d => <ReceivedList key={d._id} data={d}/>)
+        respostas?.map(d => <ReceivedList key={d._id} data={d} token={token}/>)
       }
-      <PaginationContainer>
+      {/* <PaginationContainer>
         <button >{'<'}</button>
         <h2>1</h2>
         <button >{'>'}</button>
-      </PaginationContainer>
+      </PaginationContainer> */}
+      <Logout onClick={handleLogout}>Sair</Logout>
     </Container>
+    </>
   );
 }
 
 export default ReceivedMessages;
 
 
-const mockMensagensResponse = {
-  dados: [
-    {
-      _id: '17991',
-      origem: 'interna',
-      celular: '13996648775',
-      tipo: 'text',
-      texto: 'texto enviado',
-      midia: {
-        midia_id: 'id da mídia',
-        midia_tipo:  'tipo da mídia'
-      },
-      template: 'Id do template',
-      parametros: ['1'],
-      gerada: new Date(),
-      processada: new Date(),
-      falha: 'string',
-      enviada: new Date(),
-      entregue: new Date(),
-      lida: new Date()
-      },
-      {
-        _id: '17992',
-        origem: 'interna',
-        celular: '13996648775',
-        tipo: 'text',
-        texto: 'texto enviado',
-        midia: {
-          midia_id: 'id da mídia',
-          midia_tipo:  'tipo da mídia'
-        },
-        template: 'Id do template',
-        parametros: ['1'],
-        gerada: new Date(),
-        processada: new Date(),
-        falha: 'string',
-        enviada: new Date(),
-        entregue: new Date(),
-        lida: new Date()
-      },
-      {
-        _id: '17993',
-        origem: 'interna',
-        celular: '13996648775',
-        tipo: 'text',
-        texto: 'texto enviado',
-        midia: {
-          midia_id: 'id da mídia',
-          midia_tipo:  'tipo da mídia'
-        },
-        template: 'Id do template',
-        parametros: ['1'],
-        gerada: new Date(),
-        processada: new Date(),
-        falha: 'string',
-        enviada: new Date(),
-        entregue: new Date(),
-        lida: new Date()
-      },
-  ]
-}

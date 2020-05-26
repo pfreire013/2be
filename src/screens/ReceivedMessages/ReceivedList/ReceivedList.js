@@ -79,7 +79,7 @@ function ReceivedList({ data, token }) {
 
     let mensagem = {
         'tipo': tipo,
-        'celular': '351913885009',
+        'celular': celular,
         'texto': text,
     }
     let dados = {

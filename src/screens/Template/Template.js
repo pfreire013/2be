@@ -1,16 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactFileReader from 'react-file-reader'
 
-import { Container, TemplateContainer, DropdownOpition, TemplateOpitionContainer, FooterContainer, ListContacts, OptionContainer, SendDropdown, Logout } from './styles';
+import { Container, TemplateContainer, DropdownOpition, TemplateOpitionContainer, FooterContainer, ListContacts, OptionContainer, SendDropdown, Logout, LoginAlertContainer } from './styles';
 import { modelarMensagem } from '../../services/GeradorMensagemServico';
 import { obterTokenUsuario, logout } from '../../services/Autenticacao';
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
 import NavBar from '../../components/NavBar/Navbar';
+import Lottie from 'react-lottie'
+import animationData from '../../assets/loading.json'
+import LoginAlert from '../../components/LoginAlert';
 
 
 function Template() {
   const [token, setToken] = useState()
+  const [tokenExpired, setTokenExpired] = useState(false)
   const [showOpiton, setShowOption] = useState(true)
   const [templates, setTemplates] = useState()
   const [selectTemplate, setSelectTemplate] = useState()
@@ -22,8 +26,6 @@ function Template() {
   const [parametrosCSV, setParametrosCSV] = useState()
   const history = useHistory()
 
-
-
   const fileInputRef = useRef()
 
 
@@ -33,7 +35,11 @@ function Template() {
   },[])
 
   useEffect(() => {
+    if(token === undefined){
+      setTokenExpired(true)
+    }
     if(token){
+      setTokenExpired(false)
       obterTemplates()
       obterCelulares()
     }
@@ -57,7 +63,6 @@ function Template() {
     }
     else {
         let dados = await res.json();
-        console.log('dados', dados)
         setTemplates(dados)
         return dados;
     }
@@ -81,7 +86,6 @@ function Template() {
     else {
         let dados = await res.json();
         setCelulares(dados)
-        console.log('dados', dados)
         return dados;
     }
   }
@@ -105,7 +109,6 @@ function Template() {
       mensagens.push(mensagem)
     }
 
-    console.log('mensagens', mensagens)
 
     let dados = {
       dados: mensagens
@@ -129,7 +132,6 @@ function Template() {
     }
     else {
         let dados = await res.json();
-        console.log('dados', dados)
         setSendSuccess(dados)
         alert('Mensagens enviadas com sucesso')
         return dados;
@@ -170,7 +172,6 @@ function Template() {
         }
         else {
             let dados = await res.json();
-            console.log('dados', dados)
             setSendSuccess(dados)
             alert('Mensagens enviadas com sucesso')
             return dados;
@@ -209,99 +210,122 @@ const handleLogout = () => {
   history.push('/');
 }
 
+const defaultOptions = {
+  loop: true,
+  autoplay: true, 
+  animationData: animationData,
+  rendererSettings: {
+    preserveAspectRatio: 'xMidYMid slice'
+  }
+};
+
 
   return (
     <>
     <NavBar index={1}/>
-    <Container>
-      <h1>Template</h1>
-      <TemplateOpitionContainer>
-        <DropdownOpition onClick={() => setShowOption(!showOpiton)}>
-          <h2>Templates</h2>
-        </DropdownOpition>
-        {
-          showOpiton ? (
-            <div>
-              {
-                templates?.map(template => {
-                  return (
-                    <OptionContainer onClick={() => setSelectTemplate(template)}>
-                      <h2>{template.nome}</h2>
-                    </OptionContainer>
-                  )
-                })
-              }
-            </div>
-          ) : null
-        }
-      </TemplateOpitionContainer>
-      <TemplateContainer>
-        {
-          selectTemplate && <h2>{selectTemplate.conteudo}</h2>
-        }        
-      </TemplateContainer>
-      <SendDropdown>
-        <h2>Tipo do envio</h2>
-        <select onChange={e => setSendOption(e.target.value)}>
-          <option selected value="0">Utilizar optins cadastrados</option>
-          <option value="1">Utilizar optins personalizados</option>
-          <option value="2">Template com parâmetros</option>
-        </select>
-      </SendDropdown>
-      <FooterContainer>
-        {
-          sendOption === '0' ? (
-            <button onClick={() => enviarMensagens()}>Enviar</button>
-          ) : (
-            <div>
-            <button onClick={() => enviarMensagensCSV()}>Enviar</button>
-            <ReactFileReader handleFiles={handleFiles} fileTypes={'.csv'}>
-              <button className='btn'>Anexar CSV</button>
-            </ReactFileReader>
+    {
+      tokenExpired ? (
+        <LoginAlertContainer>
+          <LoginAlert/>
+        </LoginAlertContainer>
+      ) : (
+        <Container>
+          <h1>Template</h1>
+          <TemplateOpitionContainer>
+            <DropdownOpition onClick={() => setShowOption(!showOpiton)}>
+              <h2>Templates</h2>
+            </DropdownOpition>
             {
-              fileCSV && <h2>{fileCSV.name}</h2>
-            }
-            </div>
-          )
-        }
-      </FooterContainer>
-      <ListContacts>
-        <ul>
-          <li>
-            <h2>Celular</h2>
-            <h2>Data Aceite</h2>
-          </li>
-          
-          {
-            sendOption !== '0' ? celularesCSV?.map(celular => {
-              var today = new Date();
-              var dd = String(today.getDate()).padStart(2, '0');
-              var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-              var yyyy = today.getFullYear();
-
-              today = mm + '/' + dd + '/' + yyyy;
-              return (
-                <li>
-                  <h2>{celular}</h2>
-                  <h2>{today}</h2>
+              showOpiton ? (
+                <div>
                   {
-                    parametrosCSV && parametrosCSV.map(parametroCSV => console.log(parametroCSV))
+                    templates?.map(template => {
+                      return (
+                        <OptionContainer onClick={() => setSelectTemplate(template)}>
+                          <h2>{template.nome}</h2>
+                        </OptionContainer>
+                      )
+                    })
                   }
-                </li>
+                </div>
+              ) : null
+            }
+          </TemplateOpitionContainer>
+          <TemplateContainer>
+            {
+              selectTemplate && <h2>{selectTemplate.conteudo}</h2>
+            }        
+          </TemplateContainer>
+          <SendDropdown>
+            <h2>Tipo do envio</h2>
+            <select onChange={e => setSendOption(e.target.value)}>
+              <option selected value="0">Utilizar optins cadastrados</option>
+              <option value="1">Utilizar optins personalizados</option>
+              <option value="2">Template com parâmetros</option>
+            </select>
+          </SendDropdown>
+          <FooterContainer>
+            {
+              sendOption === '0' ? (
+                <button onClick={() => enviarMensagens()}>Enviar</button>
+              ) : (
+                <div>
+                <button onClick={() => enviarMensagensCSV()}>Enviar</button>
+                <ReactFileReader handleFiles={handleFiles} fileTypes={'.csv'}>
+                  <button className='btn'>Anexar CSV</button>
+                </ReactFileReader>
+                {
+                  fileCSV && <h2>{fileCSV.name}</h2>
+                }
+                </div>
               )
-            }) : celulares?.slice(0, 199).map(({ celular, data_aceite}) => {
-              return (
-                <li>
-                  <h2>{celular}</h2>
-                  <h2>{data_aceite.substr(0, 10)}</h2>
-                </li>
-              )
-            })
-          }
-        </ul>
-      </ListContacts>
-    </Container>
-      <Logout onClick={handleLogout}>Sair</Logout>
+            }
+          </FooterContainer>
+          <ListContacts>
+            <ul>
+              <li>
+                <h2>Celular</h2>
+                <h2>Data Aceite</h2>
+              </li>
+              
+              {
+                sendOption !== '0' ? celularesCSV?.map(celular => {
+                  var today = new Date();
+                  var dd = String(today.getDate()).padStart(2, '0');
+                  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                  var yyyy = today.getFullYear();
+    
+                  today = mm + '/' + dd + '/' + yyyy;
+                  return (
+                    <li>
+                      <h2>{celular}</h2>
+                      <h2>{today}</h2>
+                      {
+                        parametrosCSV && parametrosCSV.map(parametroCSV => console.log(parametroCSV))
+                      }
+                    </li>
+                  )
+                }) : (
+                  celulares ? celulares.slice(0, 199).map(({ celular, data_aceite}) => {
+                    return (
+                      <li>
+                        <h2>{celular}</h2>
+                        <h2>{data_aceite.substr(0, 10)}</h2>
+                      </li>
+                    )
+                  }) : <Lottie 
+                        options={defaultOptions}
+                        height={400}
+                        width={400}
+                      />
+                ) 
+              }
+            </ul>
+          </ListContacts>
+          <Logout onClick={handleLogout}>Sair</Logout>
+        </Container>
+      )
+    }
     </>
   );
 }

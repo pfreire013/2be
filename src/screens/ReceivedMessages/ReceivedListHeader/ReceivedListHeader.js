@@ -16,13 +16,13 @@ function ReceivedListHeader() {
           <h2>Tipo</h2>
         </div>
         <div>
-          <h2>Mensagem</h2>
+          <h2>Ultima Mensagem</h2>
         </div>
         <div>
           <h2>Data</h2>
         </div>
       </DataContainer>
-      <TypeContainer>
+      {/* <TypeContainer>
           <h2>Tipo</h2>
       </TypeContainer>
       <MessageContainer>
@@ -33,7 +33,7 @@ function ReceivedListHeader() {
       </CheckBoxContainer>
       <SendContainer>
           <h2>Enviar</h2>
-      </SendContainer>
+      </SendContainer> */}
     </Container>
   );
 }

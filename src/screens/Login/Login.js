@@ -24,7 +24,6 @@ function Login() {
       e.preventDefault();
 
       try {
-          console.log('entrie')
           await login(key, senha);
           history.push('/template');
       }

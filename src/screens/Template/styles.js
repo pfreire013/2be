@@ -176,3 +176,10 @@ export const Logout = styled.button`
     background: ${theme.color.red};
     margin-top: 12px;
 `
+
+export const LoginAlertContainer = styled.div`
+  display: flex;
+  flex: 1;
+  width: 100%;
+  justify-content: center;
+`

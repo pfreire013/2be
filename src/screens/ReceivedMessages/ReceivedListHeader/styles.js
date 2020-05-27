@@ -4,7 +4,6 @@ import { theme } from '../../../theme'
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   margin: 8px 80px;
   padding: 0 8px;
 `
@@ -12,31 +11,35 @@ export const DataContainer = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
+  justify-content: flex-start;
 
   div:nth-child(1n) {
-    width: 140px;
+    width: 22%;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
   div:nth-child(2n) {
-    width: 85px;
+    width: 20%;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
   }
 
   div:nth-child(3n) {
-    width: 60px;
-    display: flex;
+    width: 15%;
     justify-content: center;
     align-items: center;
   }
 
   div:nth-child(4n) {
-    width: 250px;
+    width: 25%;
   }
 
   div:nth-child(5n) {
-    width: 120px;
+    width: 10%;
   }
 
     h2 {

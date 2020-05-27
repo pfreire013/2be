@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { modelarMensagem } from '../../../services/GeradorMensagemServico'
 import Modal from 'react-modal';
 
-import { Container, DataContainer, TypeContainer, MessageContainer, CheckBoxContainer, SendContainer, SeeOldMessageButton, ModalContainer, ExternalMessage, InternalMessages } from './styles';
+import { Container, DataContainer, TypeContainer, MessageContainer, CheckBoxContainer, SendContainer, SeeOldMessageButton, ModalContainer, ExternalMessage, InternalMessages, ModalSendContainer, ModalSendMessageContainer } from './styles';
 import { theme } from '../../../theme';
 
 
@@ -60,26 +60,21 @@ function ReceivedList({ data, token }) {
     }
     else {
         let dados = await res.json();
-        setOldMessages(dados)
-        console.log('dados', dados)
+        let dadosReverse = dados.reverse()
+        setOldMessages(dadosReverse)
         return dados;
     }
   }
 
-  const enviarMensagens = async ( tipo, celular, text ) => {
+  const enviarMensagens = async ( id, tipo, celular, text ) => {
     if(!message) {
         alert('Escreva alguma mensagem antes de enviar')
       return
     };
 
-    if(!isChecked) {
-      alert('Check antes de ')
-    return
-  };
-
     let mensagem = {
         'tipo': tipo,
-        'celular': celular,
+        'celular': '5511970248965',
         'texto': text,
     }
     let dados = {
@@ -101,9 +96,15 @@ function ReceivedList({ data, token }) {
     }
     else {
         let dados = await res.json();
-        console.log('dados', dados)
-        setIsChecked(false)
         setIsSended(true)
+        setMessage('')
+        let currentLocalStorage = []
+        currentLocalStorage.push(localStorage.getItem('enviadas'))
+        if(currentLocalStorage === null) {
+          currentLocalStorage = []
+        }
+        currentLocalStorage.push(id)
+        localStorage.setItem('enviadas', currentLocalStorage)
         return dados;
     }
   }
@@ -134,6 +135,22 @@ function ReceivedList({ data, token }) {
                 }
               })
             }
+            <ModalSendMessageContainer>
+              <textarea 
+                placeholder='Texto'
+                value={message}
+                onChange={e => setMessage(e.target.value)}
+                rows={5}
+              />
+              <ModalSendContainer>
+                <button onClick={() => enviarMensagens(data._id, type, data.celular, message)}>
+                  <FontAwesomeIcon icon={faPaperPlane} color={theme.color.white} size='lg'/>
+                </button>
+              </ModalSendContainer>
+            </ModalSendMessageContainer>
+            {
+              isSended && <span>Mensagem enviada com sucesso!</span>
+            }
           </ModalContainer>
         </Modal>
       <DataContainer>
@@ -153,13 +170,16 @@ function ReceivedList({ data, token }) {
           <h2>{data.processada.substr(0, 10)}</h2>
         </div>
       </DataContainer>
-      <TypeContainer>
+      <SeeOldMessageButton onClick={() => openModal()}>
+        <FontAwesomeIcon icon={faEye} color={theme.color.blue} size='2x'/>
+      </SeeOldMessageButton>
+      {/* <TypeContainer>
         <select onChange={e => setType(e.target.value)}>
           <option selected value="text">Texto</option>
-          {/* <option value="Imagem">Imagem</option>
+          <option value="Imagem">Imagem</option>
           <option value="Video">Video</option>
           <option value="Audio">Audio</option>
-          <option value="Documento">Documento</option> */}
+          <option value="Documento">Documento</option>
         </select>
       </TypeContainer>
       <MessageContainer>
@@ -168,9 +188,6 @@ function ReceivedList({ data, token }) {
           onChange={e => setMessage(e.target.value)}
         />
       </MessageContainer>
-      <SeeOldMessageButton onClick={() => openModal()}>
-        <FontAwesomeIcon icon={faEye} color={theme.color.blue} size='2x'/>
-      </SeeOldMessageButton>
       <CheckBoxContainer>
           <input 
           name="check"
@@ -182,7 +199,7 @@ function ReceivedList({ data, token }) {
           <button onClick={() => enviarMensagens(type, data.celular, message)}>
             <FontAwesomeIcon icon={faPaperPlane} color={theme.color.white} size='lg'/>
           </button>
-        </SendContainer>
+        </SendContainer> */}
     </Container>
   );
 }

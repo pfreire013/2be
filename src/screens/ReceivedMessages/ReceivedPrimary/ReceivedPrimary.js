@@ -19,13 +19,10 @@ function ReceivedPrimary({ data, token, checkedAll, setCheckedAll}) {
   
     let divididoPor200 = data.length / 200
     let restoDivisao = data.length % 200
-    console.log('divididoPor200', divididoPor200)
-    console.log('restoDivisao', restoDivisao)
 
     let mensagens = []
     let arrayIndex = 0
     for(let count = 1; count <= Math.round(divididoPor200); count++){
-      console.log('count', count)
       for(let i = 0; i <= 199; i++){
           let mensagem = {
             tipo: type,
@@ -34,7 +31,6 @@ function ReceivedPrimary({ data, token, checkedAll, setCheckedAll}) {
           }
           mensagens.push(mensagem)
           arrayIndex++
-          console.log('arrayIndex', arrayIndex)
       }
 
       let filterMensagens = mensagens.filter(mensagem => {
@@ -79,28 +75,31 @@ function ReceivedPrimary({ data, token, checkedAll, setCheckedAll}) {
         <DataContainer>
           <h2>Enviar para todos os contatos</h2>
         </DataContainer>
-        <TypeContainer>
+        {/* <TypeContainer>
           <h2>
             Tipo
           </h2>
           <select onChange={e => setType(e.target.value)}>
             <option value="text">Texto</option>
-            {/* <option value="image">Imagem</option>
+            <option value="image">Imagem</option>
             <option selected value="video">Video</option>
             <option value="audio">Audio</option>
-            <option value="document">Documento</option> */}
+            <option value="document">Documento</option> 
           </select>
-        </TypeContainer>
+        </TypeContainer> */}
         <MessageContainer>
           <h2>
             Mensagem
           </h2>
-          <input 
-            placeholder='Texto'
-            onChange={e => setMessage(e.target.value)}
+          <textarea 
+                placeholder='Texto'
+                value={message}
+                onChange={e => setMessage(e.target.value)}
+                rows={5}
           />
         </MessageContainer>
         <CheckBoxContainer>
+          <h2>Check</h2>
           <input 
           name="checkAll"
           type="checkbox"

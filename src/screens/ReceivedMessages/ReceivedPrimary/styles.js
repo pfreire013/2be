@@ -10,7 +10,8 @@ export const Container = styled.div`
   padding:  8px 16px 8px 16px;
   margin: 8px 80px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  margin-bottom: 80px;
+  margin-bottom: 20px;
+  margin-top: 40px;
   `
 
 export const Header = styled.div`
@@ -20,7 +21,7 @@ export const Header = styled.div`
 `
 
 export const DataContainer = styled.div`
-  width: 35%;
+  width: 45%;
   display: flex;
   justify-content: center;
   align-items: center; 
@@ -61,7 +62,7 @@ export const TypeContainer = styled.div`
 `
 
 export const MessageContainer = styled.div`
-  width: 30%;
+  width: 40%;
   display: flex;
   justify-content: center;
   align-items: flex-start; 
@@ -78,20 +79,31 @@ export const MessageContainer = styled.div`
     margin-bottom: 8px;
     }
 
-  input {
+  textarea {
     border: 1px solid ${theme.color.lightGray};
-    height: 50px;
-    width: 100%;
+    height: 70px;
+    width: 90%;
     padding: 8px;
+    font-size: 16px;
+    margin: 0 20px;
   }
 `
 
 export const CheckBoxContainer = styled.div`
-  width: 5%;
+  width: 7%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center; 
   border-right: 1px solid ${theme.color.lightGray};
+
+  h2 {
+    font-size: 20px;
+    color: #000;
+    text-align: center;
+    font-weight: normal;
+    margin-bottom: 30%;
+    }
 
 
   input[type="checkbox"] {
@@ -104,6 +116,14 @@ export const SendContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  h2 {
+    font-size: 20px;
+    color: #000;
+    text-align: center;
+    font-weight: normal;
+    margin-bottom: 30%;
+    }
 
   button {
     height: 50px;

@@ -28,6 +28,7 @@ export const DataContainer = styled.div`
   div:nth-child(2n) {
     width: 15%;
     display: flex;
+    flex: 1;
     justify-content: center;
     align-items: center;
   }
@@ -55,14 +56,13 @@ export const DataContainer = styled.div`
 
   div {
     padding: 0 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+ 
     border-right: 1px solid ${theme.color.lightGray};
 
     h2 {
       font-size: 16px;
       font-weight: normal;
+      text-align: center;
     }
   }
 `
@@ -133,6 +133,11 @@ export const ModalContainer = styled.div`
   max-height: 500px;
   background: ${theme.color.white};
   overflow-y: scroll;
+
+  span {
+    color: ${theme.color.green};
+    font-size: 14px;
+  }
 `
 
 export const ExternalMessage = styled.div`
@@ -171,5 +176,35 @@ export const InternalMessages = styled.div`
     text-align: right;
     font-size: 16px;
     font-weight: normal;
+  }
+`
+
+
+export const ModalSendMessageContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 8px; 
+
+  textarea {
+    border: 1px solid ${theme.color.lightGray};
+    height: 70px;
+    width: 80%;
+    padding: 8px;
+    font-size: 16px;
+  }
+`
+
+export const ModalSendContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+    border: none;
+    background: ${theme.color.green};
   }
 `

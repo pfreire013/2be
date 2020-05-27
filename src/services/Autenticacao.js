@@ -8,7 +8,6 @@ export async function login(key, senha) {
             key_acesso: key,
             password: senha
         }
-        console.log('autenticacao', autenticacao)
 
         const detalhesChamada = {
             method: 'POST',
@@ -18,9 +17,6 @@ export async function login(key, senha) {
             },
             body: JSON.stringify(autenticacao)
         }
-
-        console.log('detalhesChamada', detalhesChamada)
-
 
         let res = await fetch('http://34.217.148.38/autenticacao/', detalhesChamada);
 

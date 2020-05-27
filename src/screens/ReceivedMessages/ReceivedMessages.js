@@ -46,7 +46,7 @@ function ReceivedMessages() {
 
   const refreshLocalStorare = () => {
     let localDataString = localStorage.getItem('enviadas')
-    let localDataArray = localDataString.split(',')
+    let localDataArray = localDataString?.split(',')
     setEnviadasId(localDataArray)
   }
 
@@ -93,7 +93,7 @@ const timeValidate = (data) => {
 
 const idValidate = (data) => {
   refreshLocalStorare()
-  let found = data.filter(d => enviadasId.some(envId => envId === d._id))
+  let found = data.filter(d => enviadasId?.some(envId => envId === d._id))
   found.map(f => data.splice(data.indexOf(f), 1))
   setRespostas(data)
 }

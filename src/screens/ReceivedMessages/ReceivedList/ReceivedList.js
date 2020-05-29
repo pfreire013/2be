@@ -48,7 +48,7 @@ function ReceivedList({ data, token }) {
    console.log('data._id', data._id)
    console.log('dataUTC', dataUTC)
    console.log('dataUTC ++', moment(dataUTC).utcOffset(-240).format())
-   setDataFuso(moment(dataUTC).utcOffset(-240).format('DD-MM-YYYYTHH:mm:ss'))
+   setDataFuso(moment(dataUTC).utcOffset(-180).format('DD-MM-YYYYTHH:mm:ss'))
   }
 
   const obterRespostasUsuario = async () => {

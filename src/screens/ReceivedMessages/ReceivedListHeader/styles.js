@@ -23,23 +23,22 @@ export const DataContainer = styled.div`
   div:nth-child(2n) {
     width: 20%;
     display: flex;
-    flex: 1;
     justify-content: center;
     align-items: center;
   }
 
   div:nth-child(3n) {
-    width: 15%;
+    width: 400px;
+    display: flex;
     justify-content: center;
     align-items: center;
   }
 
   div:nth-child(4n) {
-    width: 25%;
-  }
-
-  div:nth-child(5n) {
-    width: 10%;
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
     h2 {

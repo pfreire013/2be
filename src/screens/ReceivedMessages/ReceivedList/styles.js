@@ -34,24 +34,21 @@ export const DataContainer = styled.div`
   }
 
   div:nth-child(3n) {
-    width: 10%;
+    width: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
   div:nth-child(4n) {
-    width: 250px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  div:nth-child(5n) {
     width: 120px;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    h2:first-child {
+      margin-right: 8px;
+    }
   }
 
   div {

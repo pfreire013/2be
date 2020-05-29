@@ -6,10 +6,10 @@ import { url_api, autenticar } from '../../services/ApiServico'
 import Lottie from 'react-lottie'
 import animationData from '../../assets/loading.json'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faChevronRight, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 
-import { Container, Logout, LoginAlertContainer, ReloadButton, ReloadContainer, SearchContainer } from './styles';
+import { Container, Logout, LoginAlertContainer, ReloadButton, ReloadContainer, SearchContainer, SkipContainer, PaginationContainer, PageText } from './styles';
 import { obterMensagens } from '../../services/MensagemServico';
 import NavBar from '../../components/NavBar/Navbar';
 import { obterTokenUsuario, logout } from '../../services/Autenticacao';
@@ -26,6 +26,9 @@ function ReceivedMessages() {
   const [search, setSearch] = useState()
   const [searchData, setSearchData] = useState()
   const [enviadasId, setEnviadasId] = useState()
+  const [celularesCSV, setCelularesCSV] = useState()
+  const [skip, setSkip] = useState(1)
+
   const history = useHistory()
 
   useEffect(() => {
@@ -52,7 +55,8 @@ function ReceivedMessages() {
 
   const obterRespostas = async () => {
     let parametros = {
-        origem: 'externa'
+        origem: 'externa',
+        skip: skip - 1
     }
     var url = new URL('http://34.217.148.38/mensagem/');
     Object.keys(parametros).forEach(key => url.searchParams.append(key, parametros[key]));
@@ -74,6 +78,7 @@ function ReceivedMessages() {
     }
     else {
         let dados = await res.json();
+        console.log('dados', dados)
         timeValidate(dados)
         return dados;
     }
@@ -124,7 +129,19 @@ const defaultOptions = {
 
     setSearchData(res)
   }
-  
+
+  const handleSkip = (index) => { 
+    if(index === 'up') {
+      setSkip(skip + 1)
+      setRespostas()
+      obterRespostas()
+    }
+    if(index === 'down' && skip > 1 ){
+      setSkip(skip - 1)
+      setRespostas()
+      obterRespostas()
+    }
+  }
 
   return (
     <>
@@ -136,8 +153,11 @@ const defaultOptions = {
         </LoginAlertContainer>
       ) : (
         <Container>
-          <ReceivedPrimary data={respostas} token={token} setCheckedAll={setCheckedAll} checkedAll={checkedAll} />
+          <ReceivedPrimary data={respostas} token={token} celularesCSV={celularesCSV} setCelularesCSV={setCelularesCSV} />
           {
+            celularesCSV ? null : (
+              <>
+              {
             respostas ? (
               <>
               <ReloadContainer>
@@ -152,6 +172,18 @@ const defaultOptions = {
                 </SearchContainer>
                 <ReloadButton onClick={() => reloadList()}>Atualizar Lista</ReloadButton>
               </ReloadContainer>
+              <PaginationContainer>
+                <SkipContainer onClick={() => handleSkip('down')}>
+                <FontAwesomeIcon icon={faChevronLeft} color={theme.color.Gray} size='lg' />
+                </SkipContainer>
+                <h3>{skip === 1 ? null : skip - 1}</h3>
+                <h2>{skip}</h2>
+                <h3>{skip + 1}</h3>
+                <SkipContainer onClick={() => handleSkip('up')}>
+                  <FontAwesomeIcon icon={faChevronRight} color={theme.color.Gray} size='lg' />
+                </SkipContainer>
+              </PaginationContainer>
+
               <ReceivedListHeader />
               </>
             ) : (
@@ -172,7 +204,10 @@ const defaultOptions = {
             <button >{'<'}</button>
             <h2>1</h2>
             <button >{'>'}</button>
-          </PaginationContainer> */}
+          </PaginationContainer> */} 
+              </>
+            )
+          }
           <Logout onClick={handleLogout}>Sair</Logout>
         </Container>
       )

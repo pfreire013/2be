@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { faPaperPlane, faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { modelarMensagem } from '../../../services/GeradorMensagemServico'
+import moment from 'moment'
 import Modal from 'react-modal';
 
 import { Container, DataContainer, TypeContainer, MessageContainer, CheckBoxContainer, SendContainer, SeeOldMessageButton, ModalContainer, ExternalMessage, InternalMessages, ModalSendContainer, ModalSendMessageContainer } from './styles';
@@ -27,6 +27,11 @@ function ReceivedList({ data, token }) {
   const [modalIsOpen,setIsOpen] = useState(false)
   const [oldMessages, setOldMessages] = useState()
   const [isSended,setIsSended] = useState(false)
+  const [dataFuso, setDataFuso] = useState()
+
+  useEffect(() => {
+    dataUtc()
+  }, [])
 
   function closeModal(){
     setIsOpen(false);
@@ -35,6 +40,15 @@ function ReceivedList({ data, token }) {
   function openModal(){
     setIsOpen(!modalIsOpen);
     obterRespostasUsuario()
+  }
+
+  const dataUtc = () => {
+   const dataUTC = moment.utc(data.processada, 'DD-MM-YYYYTHH:mm:ss:SSSSSS').valueOf()
+
+   console.log('data._id', data._id)
+   console.log('dataUTC', dataUTC)
+   console.log('dataUTC ++', moment(dataUTC).utcOffset(-240).format())
+   setDataFuso(moment(dataUTC).utcOffset(-240).format('DD-MM-YYYYTHH:mm:ss'))
   }
 
   const obterRespostasUsuario = async () => {
@@ -160,14 +174,15 @@ function ReceivedList({ data, token }) {
         <div>
           <h2>{data.origem}</h2>
         </div>
-        <div>
+        {/* <div>
           <h2>{data.tipo}</h2>
-        </div>
+        </div> */}
         <div>
           <h2>{data.texto}</h2>
         </div>
         <div>
-          <h2>{data.processada.substr(0, 10)}</h2>
+          <h2>{dataFuso?.substr(0, 10)}</h2>
+          <h2>{dataFuso?.substr(11, 5)}</h2>
         </div>
       </DataContainer>
       <SeeOldMessageButton onClick={() => openModal()}>

@@ -5,25 +5,6 @@ export const Container = styled.div`
   min-width: 100%;
 `
 
-export const PaginationContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-
-  button {
-    width: 30px;
-    height: 30px;
-    border-radius: 20px;
-  }
-
-  h2 {
-    font-size: 18px;
-    margin: 0 8px;
-  }
-`
-
 export const Logout = styled.button`
   height: 40px;
   padding: 8px;
@@ -77,5 +58,33 @@ export const SearchContainer = styled.div`
     border: none;
     border-radius: 0 10px 10px 0;
     cursor: pointer;
+  }
+`
+
+export const SkipContainer = styled.button`
+  height: 40px;
+  width: 40px;
+  border: none;
+  border-radius: 20px;
+  background: ${theme.color.white};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+export const PaginationContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+
+  h2 {
+    margin: 0 12px;
+  }
+
+  h3 {
+    margin: 0 12px;
+    color: ${theme.color.Gray};
+    opacity: 0.5
   }
 `

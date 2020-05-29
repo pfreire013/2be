@@ -7,14 +7,14 @@ function ReceivedListHeader() {
     <Container>
       <DataContainer>
         <div>
-          <h2>ID</h2>
+          <h2>Celular</h2>
         </div>
         <div>
           <h2>Origem</h2>
         </div>
-        <div>
+        {/* <div>
           <h2>Tipo</h2>
-        </div>
+        </div> */}
         <div>
           <h2>Ultima Mensagem</h2>
         </div>

@@ -306,7 +306,7 @@ const defaultOptions = {
                     </li>
                   )
                 }) : (
-                  celulares ? celulares.slice(0, 199).map(({ celular, data_aceite}) => {
+                  celulares ? celulares.map(({ celular, data_aceite}) => {
                     return (
                       <li>
                         <h2>{celular}</h2>

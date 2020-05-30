@@ -98,13 +98,15 @@ function ReceivedPrimary({ data, token, setCelularesCSV, celularesCSV }) {
 
      let divididoPor200 = arrayCelularString.length < 200 ? 1 :  arrayCelularString.length / 200
      console.log('divididoPor200', divididoPor200)
+     console.log('Math.ceil(divididoPor200', Math.ceil(divididoPor200))
      let restoDivisao = arrayCelularString.length % 200
      console.log('restoDivisao', restoDivisao)
 
     let mensagens = []
     let arrayIndex = 0
     for(let count = 1; count <= Math.ceil(divididoPor200); count++){
-    console.log('first for')
+    console.log('first for', count)
+    mensagens = []
        for(let i = 0; i <= 199; i++){
        console.log('secound for')
            let mensagem = {
@@ -114,7 +116,6 @@ function ReceivedPrimary({ data, token, setCelularesCSV, celularesCSV }) {
            }
            mensagens.push(mensagem)
            arrayIndex++
-       }
       }
 
      console.log('mensagens', mensagens)
@@ -142,21 +143,23 @@ function ReceivedPrimary({ data, token, setCelularesCSV, celularesCSV }) {
       body: JSON.stringify(dados)
     }  
 
-    let res = await fetch('http://34.217.148.38/mensagem/', detalhesChamada);
 
-    if (!res.ok) {
-        let erro = await res.json();
-        throw new Error(erro);
-    }
-    else {
-        let dados = await res.json();
-        console.log(dados)
-        setSendSuccess(dados)
-        alert('Mensagens enviadas com sucesso')
-        return dados;
+    console.log('fetch da mensagem', dados)
+    setMessage([])
+
+    // let res = await fetch('http://34.217.148.38/mensagem/', detalhesChamada);
+
+    // if (!res.ok) {
+    //     let erro = await res.json();
+    //     throw new Error(erro);
+    // }
+    // else {
+    //     let dados = await res.json();
+    //     console.log('dados', dados)
+    //     setMessage([])
+    //   }
     }
   }
-
 
   const handleFiles = files => {
     setFileCSV(files)

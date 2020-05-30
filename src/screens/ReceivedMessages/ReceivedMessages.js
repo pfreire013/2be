@@ -101,6 +101,7 @@ const idValidate = (data) => {
   let found = data.filter(d => enviadasId?.some(envId => envId === d._id))
   found.map(f => data.splice(data.indexOf(f), 1))
   setRespostas(data)
+  console.log('data', data)
 }
 
 const handleLogout = () => {

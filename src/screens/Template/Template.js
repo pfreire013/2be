@@ -101,17 +101,33 @@ function Template() {
       return
     }
 
+    // if(sendOption === '1' && !parametrosCSV){
+    //   alert('Esse tipo de envio nao aceita parametros')
+    //   return
+    // }
+
     let arrayCelularString = celularesCSV.map(celularCSV => celularCSV.toString())
 
     let mensagens = []
     for(let i = 0; i < celularesCSV.length ; i++){
-      let mensagem = modelarMensagem('template', arrayCelularString[i], selectTemplate._id, selectTemplate.conteudo, [] )
+      console.log('parametrosCSV', parametrosCSV)
+      let parametros 
+      if(parametrosCSV){
+        parametros = parametrosCSV[i]?.split(',')
+      }
+      let mensagem = modelarMensagem('template', arrayCelularString[i], selectTemplate._id, selectTemplate.conteudo, parametros || [] )
       mensagens.push(mensagem)
     }
 
+    let filterMensagens = mensagens.filter(mensagem => {
+      if(mensagem.celular !== undefined && mensagem.celular !== '') {
+        return mensagem
+      }
+    })
+
 
     let dados = {
-      dados: mensagens
+      dados: filterMensagens
   }
 
     let cabecalho = new Headers();
@@ -124,18 +140,20 @@ function Template() {
       body: JSON.stringify(dados)
     }  
 
-    let res = await fetch('http://34.217.148.38/mensagem/', detalhesChamada);
+    console.log('fetch', dados)
 
-    if (!res.ok) {
-        let erro = await res.json();
-        throw new Error(erro);
-    }
-    else {
-        let dados = await res.json();
-        setSendSuccess(dados)
-        alert('Mensagens enviadas com sucesso')
-        return dados;
-    }
+     let res = await fetch('http://34.217.148.38/mensagem/', detalhesChamada);
+
+     if (!res.ok) {
+         let erro = await res.json();
+         throw new Error(erro);
+     }
+     else {
+         let dados = await res.json();
+         setSendSuccess(dados)
+         alert('Mensagens enviadas com sucesso')
+         return dados;
+     }
   }
 
   const enviarMensagens = async () => {
@@ -198,6 +216,7 @@ const handleFiles = files => {
         })
         console.log(parametros[0].split(','))
         setParametrosCSV(parametros)
+        console.log('parametros', parametros)
       }
       setCelularesCSV(celulares)
   }
@@ -289,21 +308,34 @@ const defaultOptions = {
               </li>
               
               {
-                sendOption !== '0' ? celularesCSV?.map(celular => {
+                sendOption !== '0' ? celularesCSV?.map((celular, index) => {
                   var today = new Date();
                   var dd = String(today.getDate()).padStart(2, '0');
                   var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
                   var yyyy = today.getFullYear();
+                  console.log('celular', celular)
     
                   today = mm + '/' + dd + '/' + yyyy;
                   return (
-                    <li>
-                      <h2>{celular}</h2>
-                      <h2>{today}</h2>
-                      {
-                        parametrosCSV && parametrosCSV.map(parametroCSV => console.log(parametroCSV))
-                      }
-                    </li>
+                    celular[0] !== undefined && celular[0] !== '' ? (
+                      <li>
+                        <h2>{celular}</h2>
+                        <h2>{today}</h2>
+                        {
+                          // parametrosCSV && parametrosCSV[index].map(parametroCSV => {
+                          //   console.log('parametroCSV', parametroCSV)
+                          //   let params = parametroCSV?.split(',')
+                          //   console.log('params', params)
+                          //   return params?.map(p => {
+                          //   console.log('p', p)
+
+                          //     return <h2>{p}</h2>
+                          //   })
+                            
+                          // })
+                        }
+                      </li>
+                    ) : null
                   )
                 }) : (
                   celulares ? celulares.map(({ celular, data_aceite}) => {

@@ -50,10 +50,14 @@ export const TemplateOpitionContainer = styled.div`
   width: 80%;
 
   div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
      div{
       opacity: ${props => props.show ? 0 : 1};
       padding-left: 8px;
       margin: 8px 0;
+      
 
         h2 {
           font-size: 14px;
